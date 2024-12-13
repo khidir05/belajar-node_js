@@ -1,10 +1,12 @@
 const express = require('express')
+const expressLayouts = require('express-ejs-layouts')
 const app = express()
 const port = 3000
 
 //Gunakan ejs
 
 app.set('view engine', 'ejs')
+app.use(expressLayouts);
 
 app.get('/', (req, res) => {
 //   res.send('Hello World!')
@@ -24,19 +26,24 @@ app.get('/', (req, res) => {
     ]
     res.render('index', { 
         nama : 'Khidir Afwan', 
-        title: 'Halaman home',
+        title: 'Halaman home abcd',
         mahasiswa,
+        layout: 'layouts/main-layouts'
     });
 })
 
 app.get('/about', (req, res) => {
     // res.send('ini about')
-    res.render('about');
+    res.render('about', {
+        layout: 'layouts/main-layouts',
+        title: 'Halaman about'});
 })
 
 app.get('/contact', (req, res) => {
     // res.send('ini kontak')
-    res.render('contact');
+    res.render('contact', {
+        layout: 'layouts/main-layouts',
+        title: 'Halaman contact'});
 })
 
 app.get('/product/:id', (req, res) => {
