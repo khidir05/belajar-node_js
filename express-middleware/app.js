@@ -15,12 +15,6 @@ app.use(morgan('dev'))
 //Built in middleware
 app.use(express.static('public'))
 
-//Aplication level middleware
-app.use((req, res, next) => {
-    console.log('Time:', Date.now())
-    next()
-})
-
 app.get('/', (req, res) => {
 //   res.send('Hello World!')
     const mahasiswa = [
@@ -59,9 +53,11 @@ app.get('/contact', (req, res) => {
         title: 'Halaman contact'});
 })
 
-app.get('/product/:id', (req, res) => {
-    res.send(`product ID :  ${req.params.id} <br> category ID : ${req.query.category}`)
-}) 
+//Aplication level middleware
+app.use((req, res, next) => {
+    console.log('Time:', Date.now())
+    next()
+})
 
 app.use('/', (req, res) => {
 //   res.status(404),
